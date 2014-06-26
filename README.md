@@ -1,7 +1,8 @@
 Just-Keep-Yelling
 =================
 
-
 Interactive art project for Art for Interactive Media final project in Processing.
+Allow for the game to pick up the average sound level of your surroundings during configuration.
+Then, just keep yelling.
 
-To start, open main.pde in Processing and run.
+by John Conover
