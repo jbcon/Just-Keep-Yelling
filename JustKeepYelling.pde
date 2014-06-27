@@ -1,6 +1,7 @@
 import ddf.minim.*;
+import ddf.minim.analysis.*;
 
-/* SoundReact
+/* JustKeepYelling
   John Conover
   Controls:
     Yell into the mic as long as you can.
@@ -8,6 +9,7 @@ import ddf.minim.*;
 
 SoundHandler sound;
 BlackHole blackHole;
+FgEffects fg;
 
 //time
 float currentTime;
@@ -42,6 +44,7 @@ void setup() {
 
   minim=new Minim (this);
   sound = new SoundHandler(minim);
+  fg = new FgEffects(1024, 768);
   
   blackHole = new BlackHole();
   currentTime = 0;
@@ -54,11 +57,17 @@ float update() {
   currentTime = millis();
   dt = currentTime-lastTime;
   /*====================*/
-
-  
   sound.update();
   //grabs volume from soundhandler
-  float vol = sound.getVolume();
+  float vol = sound.getVolMod();
+  
+    
+  float freq = sound.getFreq();
+  //println(freq);
+  fg.update(freq, sound.getVolume());
+  
+  
+  
   //if there is sound detected above threshold
   if (vol > 0) {
     pushMatrix();
@@ -81,6 +90,7 @@ void draw() {
     blackHole.draw(volume);
     if (volume > 0)
       popMatrix();
+    fg.draw();
   }
   //reset lastTime
   lastTime = currentTime;
