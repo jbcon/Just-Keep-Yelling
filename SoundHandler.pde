@@ -37,13 +37,15 @@ class SoundHandler {
   void update() {
     //-----Perform pitch stuff-------*/
     fft.forward(in.mix);
-    int highest = 0;
+    int avg = 0;
     for (int i = 0; i < fft.specSize(); i++) {
-      if (fft.getBand(i) > fft.getBand(highest)){
+      /*if (fft.getBand(i) > fft.getBand(highest)){
         highest = i;
-      }
+      }*/
+      avg += fft.getBand(i);
     }
-    freq = highest*.5*in.sampleRate()/fft.specSize();
+    avg /= fft.specSize();
+    freq = avg*.5*in.sampleRate()/fft.specSize();
     
     
     

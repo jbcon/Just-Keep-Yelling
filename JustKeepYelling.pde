@@ -64,7 +64,7 @@ float update() {
     
   float freq = sound.getFreq();
   //println(freq);
-  fg.update(freq, sound.getVolume());
+  fg.update(freq, sound.getVolMod());
   
   
   
